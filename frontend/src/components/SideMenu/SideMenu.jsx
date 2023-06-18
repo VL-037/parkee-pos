@@ -27,12 +27,7 @@ const SideMenu = () => {
   return (
     <div id="sideMenu" className="white-bg">
       <a href="/check-in">
-        <img
-          src={images.parkeeLogo}
-          alt="Parkee Logo"
-          width={250}
-          id="parkeeLogo"
-        />
+        <img src={images.parkeeLogo} alt="Parkee Logo" id="parkeeLogo" />
       </a>
       <div className="center">
         <img src={images.avatarProfile} alt="Officer" id="avatarProfile" />

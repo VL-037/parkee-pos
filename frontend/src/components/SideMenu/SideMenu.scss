@@ -1,13 +1,11 @@
 #sideMenu {
     height: 100%;
-    width: auto;
-    position: absolute;
     top: 0;
     left: 0;
     border-right: 1px solid var(--grey-color);
     overflow-y: auto;
 
-    >* {
+    > * {
         display: block;
     }
 
@@ -17,7 +15,7 @@
 }
 
 #parkeeLogo {
-    margin: 10px 15px 0;
+    max-width: 100%;
 }
 
 #avatarProfile {

@@ -1,7 +1,3 @@
-.app {
-  text-align: center;
-}
-
 .primary-bg {
   background-color: var(--primary-color);
 }
@@ -26,7 +22,7 @@
   font-weight: 700;
 }
 
-.container {
+.app_container {
   width: 100%;
   min-height: 100vh;
 }
@@ -38,6 +34,9 @@
   justify-content: center;
 }
 
+p {
+  margin: 0;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -69,12 +68,10 @@ button {
 
   &:hover {
     background-color: var(--medium-dark-primary-color);
-    border: 1px solid var(--medium-dark-primary-color);
   }
 
   &:active {
     background-color: var(--dark-primary-color);
-    border: 1px solid var(--dark-primary-color);
   }
 }
 
@@ -90,4 +87,26 @@ button {
   &:active {
     background-color: var(--dark-secondary-color);
   }
+}
+
+.col,
+.row,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-6,
+.col-md-8,
+.col-md-10 {
+  border: 2px solid black;
+}
+
+.row,
+.row > *,
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
+.row {
+  height: 100vh;
 }

@@ -5,7 +5,6 @@ import { images } from "../../constants";
 const ReportButton = () => {
   return (
     <div id="report-button-container">
-      {/* <button className="primary-btn">Primary Button</button> */}
       <button className="secondary-btn" id="report-button">
         Report Problem
         <img src={images.problemReport} alt="" width={19} />
