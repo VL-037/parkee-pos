@@ -122,44 +122,7 @@ public class TicketServiceImpl implements TicketService {
     CheckInTicket checkInTicket =
         checkInTicketRepository.findByIdAndPlateNumberAndParkingSpotParkingLotIdAndIsActiveTrue(
             request.getParkingSlipId(), request.getPlateNumber(), request.getParkingLotId());
-    validateCheckInTicket(checkInTicket);
-
-    ParkingSpot parkingSpot = checkInTicket.getParkingSpot();
-    validateParkingSpot(parkingSpot);
-    String spot = String.format("%s%s", parkingSpot.getArea(), parkingSpot.getCode());
-
-    // GetMemberDetailRequest getMemberDetailRequest = new GetMemberDetailRequest();
-    // getMemberDetailRequest.setPlateNumber(request.getPlateNumber());
-    // Member member = memberService.getMemberDetail(getMemberDetailRequest);
-    // validateMember(member);
-
-    // LocalDateTime checkOutDate = LocalDateTime.now();
-    // double parkingDuration = TimeUtil.getParkingDurationInSeconds(checkInTicket.getCreatedDate(), checkOutDate);
-    // int durationInHour = (int) Math.ceil(parkingDuration / 3600.0);
-    //
-    // ParkingRate parkingRate = parkingRateRepository.findTopByMarkForDeleteFalse();
-    // double ratePerHour = 0;
-    // if (Objects.nonNull(parkingRate)) {
-    // ratePerHour = parkingRate.getRatePerHour();
-    // }
-    //
-    // double price = durationInHour * ratePerHour;
-    // double discount = 0;
-    // double finalPrice = price - discount;
-
-    // return GetCheckOutTicketDetailResponse.builder()
-    // .parkingType(request.getVehicleTypeId())
-    // .parkingSpot(spot)
-    // .memberName(member.getName())
-    // .memberExpiredDate(member.getMemberExpiredDate())
-    // .checkInDate(checkInTicket.getCreatedDate())
-    // .durationInSeconds((long) parkingDuration)
-    // .price(price)
-    // .discount(discount)
-    // .finalPrice(finalPrice)
-    // .createdDate(checkOutDate)
-    // .build();
-    return checkInTicket;
+    return validateCheckInTicket(checkInTicket);
   }
 
   @Override
