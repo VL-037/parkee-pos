@@ -1,3 +1,5 @@
+BEGIN TRANSACTION;
+
 INSERT INTO member (id, name, plate_number, member_expired_date, created_by, created_date, updated_by, updated_date, mark_for_delete)
 VALUES
   ('c4a760a8-dbcf-4d06-8d4c-536b91788053', 'John Doe', 'AB 1234 CD', '2023-06-30 00:00:00', 'ADMIN', '2023-06-16 10:00:00', 'ADMIN', '2023-06-16 10:00:00', FALSE),
@@ -94,4 +96,6 @@ VALUES
 
 UPDATE parking_spot
 SET is_occupied = true
-WHERE id IN ('f0d25c11-36fd-4186-99b4-d4b76d23e0f0', 'fd7bdc20-2f5e-4f1f-92a2-0c0cfc97d780', 'd585af43-ec70-4d6a-9edf-3a8226924620', '292c6ea1-3be7-4f3b-83dd-1d74a4ef00e9', '378b3d9d-0a7f-4755-b64c-0cfc286fe2cd')
+WHERE id IN ('f0d25c11-36fd-4186-99b4-d4b76d23e0f0', 'fd7bdc20-2f5e-4f1f-92a2-0c0cfc97d780', 'd585af43-ec70-4d6a-9edf-3a8226924620', '292c6ea1-3be7-4f3b-83dd-1d74a4ef00e9', '378b3d9d-0a7f-4755-b64c-0cfc286fe2cd');
+
+COMMIT;

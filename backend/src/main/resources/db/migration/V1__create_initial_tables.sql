@@ -1,3 +1,5 @@
+BEGIN TRANSACTION;
+
 CREATE TABLE member (
   id VARCHAR(36) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -167,3 +169,5 @@ CREATE TABLE check_out_ticket (
   FOREIGN KEY (officer_id) REFERENCES officer (id),
   FOREIGN KEY (check_in_ticket_id) REFERENCES check_in_ticket (id)
 );
+
+COMMIT;
