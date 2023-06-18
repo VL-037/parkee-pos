@@ -1,1 +1,4 @@
-export { default as images } from "./images";
+import images from "./images";
+import ApiPath from "./ApiPath";
+
+export { images, ApiPath };
