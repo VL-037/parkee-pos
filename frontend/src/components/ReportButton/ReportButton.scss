@@ -1,0 +1,11 @@
+#report-button-container {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 999;
+}
+
+#report-button {
+    display: flex;
+    align-items: center;
+}

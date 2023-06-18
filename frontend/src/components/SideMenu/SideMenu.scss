@@ -1,0 +1,55 @@
+#sideMenu {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: 1px solid var(--grey-color);
+    overflow-y: auto;
+
+    >* {
+        display: block;
+    }
+
+    #pageList {
+        padding-top: 50px;
+    }
+}
+
+#parkeeLogo {
+    margin: 10px 15px 0;
+}
+
+#avatarProfile {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+
+    img {
+        display: inline;
+        margin: 0;
+        height: 100%;
+        width: auto;
+    }
+}
+
+.page {
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+
+    &:hover {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+    }
+
+    &:active {
+        background-color: var(--dark-primary-color);
+    }
+
+    img {
+        margin: 0 10px;
+    }
+}
