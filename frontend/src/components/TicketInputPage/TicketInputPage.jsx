@@ -8,6 +8,8 @@ const TicketInputPage = ({
   ticketType,
   vehicleTypes,
   paymentMethods,
+  vehicleType,
+  handleVehicleType,
   handlePlateNumber,
   plateNumber,
 }) => {
@@ -20,8 +22,9 @@ const TicketInputPage = ({
         <h2>Check In Ticketing</h2>
         <Camera types={cameraTypes} />
         <TicketInput
-          ticketType={TicketType.CHECK_IN}
           vehicleTypes={vehicleTypes}
+          vehicleType={vehicleType}
+          handleVehicleType={handleVehicleType}
           handlePlateNumber={handlePlateNumber}
           plateNumber={plateNumber}
         />
@@ -34,7 +37,6 @@ const TicketInputPage = ({
         <h2>Check Out Ticketing</h2>
         <Camera types={cameraTypes} />
         <TicketInput
-          ticketType={TicketType.CHECK_OUT}
           vehicleTypes={vehicleTypes}
           paymentMethods={paymentMethods}
         />

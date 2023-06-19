@@ -3,14 +3,14 @@ import "./TicketDetail.scss";
 import Clock from "../Clock/Clock";
 import ParkingLotDetail from "../ParkingLotDetail/ParkingLotDetail";
 
-const TicketDetail = ({ parkingLotDetail, member }) => {
+const TicketDetail = ({ parkingLotDetail, vehicleType, member }) => {
   const handleRefresh = () => {
     window.location.reload();
   };
 
-  function getExpiredDate(date) {
+  function formatDate(date) {
     if (!date) return "-";
-    const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    const formattedDate = new Date(date).toLocaleDateString("en-GB", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -29,7 +29,9 @@ const TicketDetail = ({ parkingLotDetail, member }) => {
         <tbody>
           <tr>
             <td className="text-start">Parking Type</td>
-            <td className="text-end">CAR</td>
+            <td className="text-end">
+              {vehicleType.length ? vehicleType : "-"}
+            </td>
           </tr>
           <tr>
             <td className="text-start">Member Name</td>
@@ -38,7 +40,7 @@ const TicketDetail = ({ parkingLotDetail, member }) => {
           <tr>
             <td className="text-start">Member Expired</td>
             <td className="text-end">
-              {getExpiredDate(member?.memberExpiredDate)}
+              {formatDate(member?.memberExpiredDate)}
             </td>
           </tr>
         </tbody>

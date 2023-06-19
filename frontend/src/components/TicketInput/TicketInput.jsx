@@ -3,7 +3,13 @@ import React, { useEffect, useState } from "react";
 import { ApiPath } from "../../constants";
 import "./TicketInput.scss";
 
-const TicketInput = ({ vehicleTypes, handlePlateNumber, plateNumber }) => {
+const TicketInput = ({
+  vehicleTypes,
+  handlePlateNumber,
+  plateNumber,
+  vehicleType,
+  handleVehicleType,
+}) => {
   const [a, setA] = useState({});
 
   const fetchMemberDetail = async () => {
@@ -30,8 +36,15 @@ const TicketInput = ({ vehicleTypes, handlePlateNumber, plateNumber }) => {
         <label htmlFor="vehicleTypeId" className="bold-700">
           Vehicle Type <span className="shortcut">(F7)</span>
         </label>
-        <select name="vehicleTypeId" id="vehicleTypeId" className="form-select">
-          <option defaultValue>select...</option>
+        <select
+          name="vehicleTypeId"
+          id="vehicleTypeId"
+          className="form-select"
+          value={vehicleType}
+          onChange={handleVehicleType}
+          defaultValue=""
+        >
+          <option value="">select...</option>
           {vehicleTypes.map((type) => (
             <option key={type.id} value={type.id}>
               {type.name.toUpperCase()}

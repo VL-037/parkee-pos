@@ -16,6 +16,7 @@ import Loader from "./components/Loader/Loader";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [parkingLotDetail, setParkingLotDetail] = useState({});
+  const [vehicleType, setVehicleType] = useState("");
   const [plateNumber, setPlateNumber] = useState("");
   const [member, setMember] = useState({});
 
@@ -27,6 +28,10 @@ function App() {
   const parkingLotId = "8d24318a-17a4-448a-9e2d-f351f1244a33";
   const params = {
     id: parkingLotId,
+  };
+
+  const handleVehicleType = (e) => {
+    setVehicleType(e.target.value);
   };
 
   const handlePlateNumber = (e) => {
@@ -91,6 +96,8 @@ function App() {
                               ticketType={TicketType.CHECK_IN}
                               vehicleTypes={parkingLotDetail.vehicleTypes}
                               paymentMethods={parkingLotDetail.paymentMethods}
+                              vehicleType={vehicleType}
+                              handleVehicleType={handleVehicleType}
                               handlePlateNumber={handlePlateNumber}
                               plateNumber={plateNumber}
                             />
@@ -103,6 +110,8 @@ function App() {
                               ticketType={TicketType.CHECK_OUT}
                               vehicleTypes={parkingLotDetail.vehicleTypes}
                               paymentMethods={parkingLotDetail.paymentMethods}
+                              vehicleType={vehicleType}
+                              handleVehicleType={handleVehicleType}
                               handlePlateNumber={handlePlateNumber}
                               plateNumber={plateNumber}
                             />
@@ -116,6 +125,7 @@ function App() {
                       parkingLotDetail={parkingLotDetail}
                       handlePlateNumber={handlePlateNumber}
                       plateNumber={plateNumber}
+                      vehicleType={vehicleType}
                       member={member}
                     />
                   </div>
