@@ -10,6 +10,10 @@
   font-size: 14px;
 }
 
+.font-16 {
+  font-size: 16px;
+}
+
 .font-24 {
   font-size: 24px;
 }
@@ -46,7 +50,7 @@ button {
   background-color: var(--grey-color);
   border: 1px solid var(--primary-color);
   color: var(--white-color);
-  padding: 0.5rem 2rem;
+  padding: 0.25rem 1.5rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -89,6 +93,11 @@ button {
   }
 }
 
+.long-btn {
+  border-radius: 50px;
+  width: 100%;
+}
+
 .col,
 .row,
 .col-md-2,
@@ -107,6 +116,26 @@ button {
   margin: 0;
 }
 
-.row {
+.height-100vh {
   height: 100vh;
 }
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.fill-remaining {
+  flex: 1 1 auto;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 48px;
+  text-decoration: underline;
+}
+
+// .table {
+//   margin: 0;
+// }
