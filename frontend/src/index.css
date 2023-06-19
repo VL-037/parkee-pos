@@ -3,19 +3,22 @@
 :root {
   --font-base: 'Nunito Sans', sans-serif;
 
-  --primary-color: #CA002A;
-  --medium-dark-primary-color: #B50025;
-  --dark-primary-color: #A20021;
-  --primary-color-disabled: #FFA1B5;
+  --primary-color: #ca002a;
+  --medium-dark-primary-color: #b50025;
+  --dark-primary-color: #a20021;
+  --primary-color-disabled: #ffa1b5;
 
-  --white-color: #FFFFFF;
-  --secondary-color: #FFFFFF;
-  --medium-dark-secondary-color: #F4F4F4;
-  --dark-secondary-color: #EFEFEF;
+  --white-color: #ffffff;
+  --secondary-color: #ffffff;
+  --medium-dark-secondary-color: #f4f4f4;
+  --dark-secondary-color: #efefef;
 
   --grey-color: #585858;
   --medium-dark-grey-color: #505050;
   --dark-grey-color: #424242;
+  --black-color: #0d0d0d;
+
+  --blue-link-color: #4223ff;
 }
 
 * {
