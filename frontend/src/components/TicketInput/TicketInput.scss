@@ -1,0 +1,27 @@
+#ticketInput {
+    // border: 2px solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inputs {
+    // border: 2px solid blue;
+
+    label {
+        color: var(--primary-color);
+
+        .shortcut {
+            color: black
+        }
+    }
+
+    input, select {
+        border-color: var(--primary-color);
+    }
+}
+
+#vehiclePlateNumber {
+    text-align: center;
+}
