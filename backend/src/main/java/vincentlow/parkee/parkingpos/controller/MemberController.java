@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import vincentlow.parkee.parkingpos.model.constant.ApiPath;
 import vincentlow.parkee.parkingpos.model.entity.Member;
-import vincentlow.parkee.parkingpos.model.request.GetMemberDetailRequest;
 import vincentlow.parkee.parkingpos.model.response.MemberResponse;
 import vincentlow.parkee.parkingpos.model.response.api.ApiSingleResponse;
 import vincentlow.parkee.parkingpos.service.MemberService;
@@ -27,16 +26,16 @@ public class MemberController extends BaseController {
   private MemberService memberService;
 
   @GetMapping
-  public ResponseEntity<ApiSingleResponse<MemberResponse>> getMemberDetail(
-      @RequestBody GetMemberDetailRequest request) {
+  public ResponseEntity<ApiSingleResponse<MemberResponse>> getMemberDetail(@RequestParam String plateNumber) {
 
     try {
-      Member member = memberService.getMemberDetail(request);
+      Member member = memberService.getMemberDetail(plateNumber);
       MemberResponse response = toMemberResponse(member);
 
       return toSuccessResponseEntity(toApiSingleResponse(response));
     } catch (RuntimeException e) {
-      log.error("#MemberController#getMemberDetail ERROR! with request: {} and error: {}", request, e.getMessage(), e);
+      log.error("#MemberController#getMemberDetail ERROR! with plateNumber: {} and error: {}", plateNumber,
+          e.getMessage(), e);
       throw new RuntimeException(e.getMessage(), e);
     }
   }
