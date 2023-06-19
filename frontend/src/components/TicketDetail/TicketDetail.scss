@@ -1,17 +1,23 @@
+#ticketDetail {
+    border-left: 2px dashed var(--grey-color);
+    height: 100%;
+    padding: 0 10px;
+}
+
 #generalInfo {
     // border: 5px solid purple;
-    padding: 10px;
+    padding: 10px 0 0 0;
 }
 
 .custom-hr {
     height: 1px;
     background-color: var(--black-color);
-    margin: 10px 0;
+    padding: 0.5px 0;
+    margin: 3px 0;
 }
 
 #ticketTable {
     // border: 5px solid orange;
-    // margin-bottom: 1rem;
 
     tbody > tr > td.text-start {
         color: var(--grey-color);
@@ -32,8 +38,13 @@
     justify-content: center;
     flex-direction: column;
 
-    a {
+    p {
         color: var(--blue-link-color);
-        margin-top: 1rem;
+        margin-top: 10px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
 }
