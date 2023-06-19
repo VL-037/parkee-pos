@@ -1,29 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import "./SideMenu.scss";
-import { images, ApiPath } from "../../constants";
+import { images } from "../../constants";
 
-const SideMenu = () => {
-  const OFFICER_IDS = ["ID23894", "ID55012", "ID75269", "ID12456", "ID98637"];
-  const randomIndex = Math.floor(Math.random() * OFFICER_IDS.length);
-
-  const [officer, setOfficer] = useState({});
-
-  const fetchOfficerDetail = async () => {
-    try {
-      const res = await axios.get(
-        `http://localhost:8080/${ApiPath.Officer}/${OFFICER_IDS[randomIndex]}`
-      );
-      setOfficer(res.data.data);
-    } catch (error) {
-      setOfficer({});
-    }
-  };
-
-  useEffect(() => {
-    fetchOfficerDetail();
-  }, []);
-
+const SideMenu = ({ officer }) => {
   return (
     <div id="sideMenu" className="white-bg">
       <a href="/check-in">
