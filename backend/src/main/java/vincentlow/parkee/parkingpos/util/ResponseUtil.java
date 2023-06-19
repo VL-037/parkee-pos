@@ -62,7 +62,7 @@ public class ResponseUtil {
         .map(ResponseUtil::toPaymentMethodResponse)
         .collect(Collectors.toList());
 
-    return ParkingLotResponse.builder()
+    ParkingLotResponse response = ParkingLotResponse.builder()
         .companyName(parkingLot.getCompany()
             .getName())
         .address(fullAddress)
@@ -71,6 +71,9 @@ public class ResponseUtil {
         .vehicleTypes(vehicleTypes)
         .paymentMethods(paymentMethods)
         .build();
+    BeanUtils.copyProperties(parkingLot, response);
+
+    return response;
   }
 
   public static VehicleTypeResponse toVehicleTypeResponse(VehicleType vehicleType) {

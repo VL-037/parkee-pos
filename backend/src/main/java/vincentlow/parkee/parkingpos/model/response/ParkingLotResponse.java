@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ParkingLotResponse {
+public class ParkingLotResponse extends BaseResponse {
 
   private String companyName;
 
