@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -63,21 +64,30 @@ public class TicketController extends BaseController {
 
   @GetMapping("/check-out")
   public ResponseEntity<ApiSingleResponse<GetCheckOutTicketDetailResponse>> getCheckOutTicketDetail(
-      @RequestBody GetCheckoutTicketDetailRequest request) {
+      @RequestParam String parkingLotId,
+      @RequestParam String parkingSlipId,
+      @RequestParam String plateNumber,
+      @RequestParam String voucherCode) {
 
     try {
       LocalDateTime checkOutDate = LocalDateTime.now();
+      GetCheckoutTicketDetailRequest request = GetCheckoutTicketDetailRequest.builder()
+          .parkingLotId(parkingLotId)
+          .parkingSlipId(parkingSlipId)
+          .plateNumber(plateNumber)
+          .build();
 
       CheckInTicket checkInTicket = ticketService.getCheckInTicketDetail(request);
       ParkingPriceResponse priceResponse =
-          parkingRateService.calculateParkingPrice(checkInTicket.getCreatedDate(), checkOutDate);
+          parkingRateService.calculateParkingPrice(checkInTicket.getCreatedDate(), checkOutDate, voucherCode);
       GetCheckOutTicketDetailResponse response =
           ResponseUtil.toGetCheckOutTicketDetailResponse(checkInTicket, priceResponse, checkOutDate);
 
       return toSuccessResponseEntity(toApiSingleResponse(response));
     } catch (RuntimeException e) {
-      log.error("#TicketController#getCheckOutTicketDetail ERROR! with request: {} and error: {}", request,
-          e.getMessage(), e);
+      log.error(
+          "#TicketController#getCheckOutTicketDetail ERROR! with parkingLotId: {}, parkingSlipId: {}, plateNumber: {}, voucherCode: {} and error: {}",
+          parkingLotId, parkingSlipId, plateNumber, voucherCode, e.getMessage(), e);
       throw new RuntimeException(e.getMessage(), e);
     }
   }

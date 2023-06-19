@@ -18,7 +18,8 @@ public class ParkingRateServiceImpl implements ParkingRateService {
   private ParkingRateRepository parkingRateRepository;
 
   @Override
-  public ParkingPriceResponse calculateParkingPrice(LocalDateTime checkInDate, LocalDateTime checkOutDate) {
+  public ParkingPriceResponse calculateParkingPrice(LocalDateTime checkInDate, LocalDateTime checkOutDate,
+      String voucherCode) {
 
     long parkingDuration = TimeUtil.getParkingDurationInSeconds(checkInDate, checkOutDate);
     int durationInHour = (int) Math.ceil(parkingDuration / 3600.0);
