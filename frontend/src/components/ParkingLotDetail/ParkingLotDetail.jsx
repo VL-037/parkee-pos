@@ -33,7 +33,7 @@ const ParkingLotDetail = () => {
       <p
         id="occupiedSpots"
         className="font-14 bold-700"
-      >{`Occupied: ${detail.occupiedSpots}/${detail.vehicleCapacity}`}</p>
+      >{`Occupied: ${detail.occupiedSpots} / ${detail.vehicleCapacity}`}</p>
     </div>
   );
 };

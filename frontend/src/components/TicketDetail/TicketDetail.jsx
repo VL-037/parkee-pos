@@ -6,13 +6,17 @@ import ParkingLotDetail from "../ParkingLotDetail/ParkingLotDetail";
 const TicketDetail = () => {
   // const [ticketDetail, setTicketDetail]
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
     <div id="ticketDetail">
       <div id="generalInfo" className="text-center">
         <Clock />
         <ParkingLotDetail />
-        <div className="custom-hr" />
       </div>
+      <div className="custom-hr" />
       <table id="ticketTable" className="table table-borderless">
         <tbody>
           <tr>
@@ -29,11 +33,12 @@ const TicketDetail = () => {
           </tr>
         </tbody>
       </table>
+      <div className="custom-hr" />
       <div id="ticketButton" className="align-center">
         <button className="primary-btn long-btn">Print Ticket</button>
-        <a href="/" className="font-14">
+        <p className="font-14" onClick={handleRefresh}>
           Refresh page(F5)
-        </a>
+        </p>
       </div>
     </div>
   );
