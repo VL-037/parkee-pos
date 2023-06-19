@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import vincentlow.parkee.parkingpos.model.constant.ErrorMessage;
 import vincentlow.parkee.parkingpos.model.entity.ParkingLot;
 import vincentlow.parkee.parkingpos.model.entity.ParkingSpot;
-import vincentlow.parkee.parkingpos.model.request.GetParkingLotDetailRequest;
 import vincentlow.parkee.parkingpos.model.request.GetParkingSpotsRequest;
 import vincentlow.parkee.parkingpos.repository.ParkingLotRepository;
 import vincentlow.parkee.parkingpos.repository.ParkingSpotRepository;
@@ -30,19 +29,17 @@ public class ParkingServiceImpl implements ParkingService {
   private ParkingSpotRepository parkingSpotRepository;
 
   @Override
-  public ParkingLot getParkingLotDetail(GetParkingLotDetailRequest request) {
+  public ParkingLot getParkingLotDetail(String id) {
 
-    validateRequest(Objects.nonNull(request), ErrorMessage.REQUEST_MUST_NOT_BE_NULL);
-    StringUtil.trimStrings(request);
-    validateRequest(StringUtils.isNotBlank(request.getParkingLotId()), ErrorMessage.PARKING_LOT_ID_MUST_BE_NOT_BLANK);
-
-    return validateParkingLot(parkingLotRepository.findByIdAndMarkForDeleteFalse(request.getParkingLotId()));
+    validateRequest(StringUtils.isNotBlank(id), ErrorMessage.PARKING_LOT_ID_MUST_BE_NOT_BLANK);
+    return validateParkingLot(parkingLotRepository.findByIdAndMarkForDeleteFalse(id));
   }
 
   @Override
-  public int countOccupiedSpots(GetParkingLotDetailRequest request) {
+  public int countOccupiedSpots(String id) {
 
-    return parkingSpotRepository.countByParkingLotIdAndIsOccupiedTrue(request.getParkingLotId());
+    validateRequest(StringUtils.isNotBlank(id), ErrorMessage.PARKING_LOT_ID_MUST_BE_NOT_BLANK);
+    return parkingSpotRepository.countByParkingLotIdAndIsOccupiedTrue(id);
   }
 
   @Override
