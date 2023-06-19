@@ -27,6 +27,7 @@ const TicketInputPage = ({
           handleVehicleType={handleVehicleType}
           handlePlateNumber={handlePlateNumber}
           plateNumber={plateNumber}
+          ticketType={ticketType}
         />
       </div>
     );
@@ -38,6 +39,7 @@ const TicketInputPage = ({
         <Camera types={cameraTypes} />
         <TicketInput
           vehicleTypes={vehicleTypes}
+          ticketType={ticketType}
           paymentMethods={paymentMethods}
         />
       </div>

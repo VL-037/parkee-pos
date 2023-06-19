@@ -20,11 +20,7 @@ function App() {
   const [vehicleType, setVehicleType] = useState("");
   const [plateNumber, setPlateNumber] = useState("");
   const [member, setMember] = useState({});
-
-  const paths = ["/check-in", "/check-out"];
-  if (!paths.includes(window.location.pathname)) {
-    window.location.href = "/check-in";
-  }
+  const [ticketType, setTicketType] = useState("");
 
   const parkingLotId = "8d24318a-17a4-448a-9e2d-f351f1244a33";
   const params = {
@@ -32,6 +28,7 @@ function App() {
   };
 
   const handleVehicleType = (e) => {
+    console.log(e.target.value);
     setVehicleType(e.target.value);
   };
 
@@ -57,7 +54,6 @@ function App() {
     const OFFICER_IDS = ["ID23894", "ID55012", "ID75269", "ID12456", "ID98637"];
     const randomIndex = Math.floor(Math.random() * OFFICER_IDS.length);
     const officerId = OFFICER_IDS[randomIndex];
-    console.log(officerId);
     try {
       const res = await axios.get(
         `http://localhost:8080/${ApiPath.Officer}/${officerId}`
@@ -82,6 +78,17 @@ function App() {
   };
 
   useEffect(() => {
+    const paths = ["/check-in", "/check-out"];
+    const curr_path = window.location.pathname;
+    console.log(curr_path);
+    if (curr_path === paths[0]) {
+      setTicketType(TicketType.CHECK_IN);
+    } else if (curr_path === paths[1]) {
+      setTicketType(TicketType.CHECK_OUT);
+    } else {
+      window.location.href = "/check-in";
+    }
+
     fetchParkingLotDetail();
     fetchOfficerDetail();
   }, []);
@@ -110,7 +117,7 @@ function App() {
                           path="/check-in"
                           element={
                             <TicketInputPage
-                              ticketType={TicketType.CHECK_IN}
+                              ticketType={ticketType}
                               vehicleTypes={parkingLotDetail.vehicleTypes}
                               paymentMethods={parkingLotDetail.paymentMethods}
                               vehicleType={vehicleType}
@@ -124,7 +131,7 @@ function App() {
                           path="/check-out"
                           element={
                             <TicketInputPage
-                              ticketType={TicketType.CHECK_OUT}
+                              ticketType={ticketType}
                               vehicleTypes={parkingLotDetail.vehicleTypes}
                               paymentMethods={parkingLotDetail.paymentMethods}
                               vehicleType={vehicleType}
@@ -145,6 +152,7 @@ function App() {
                       vehicleType={vehicleType}
                       member={member}
                       officer={officer}
+                      ticketType={ticketType}
                     />
                   </div>
                 </div>

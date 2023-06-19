@@ -2,8 +2,9 @@ import React from "react";
 import "./TicketDetail.scss";
 import Clock from "../Clock/Clock";
 import ParkingLotDetail from "../ParkingLotDetail/ParkingLotDetail";
+import { CheckInTicketDetail, CheckOutTicketDetail } from ".";
 import axios from "axios";
-import { ApiPath } from "../../constants";
+import { ApiPath, TicketType } from "../../constants";
 
 const TicketDetail = ({
   parkingLotDetail,
@@ -11,20 +12,11 @@ const TicketDetail = ({
   member,
   plateNumber,
   officer,
+  ticketType,
 }) => {
   const handleRefresh = () => {
     window.location.reload();
   };
-
-  function formatDate(date) {
-    if (!date) return "-";
-    const formattedDate = new Date(date).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-    return formattedDate;
-  }
 
   const handlePrintTicket = async () => {
     const data = {
@@ -52,26 +44,11 @@ const TicketDetail = ({
         <ParkingLotDetail parkingLotDetail={parkingLotDetail} />
       </div>
       <div className="custom-hr" />
-      <table id="ticketTable" className="table table-borderless">
-        <tbody>
-          <tr>
-            <td className="text-start">Parking Type</td>
-            <td className="text-end">
-              {vehicleType.length ? vehicleType : "-"}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-start">Member Name</td>
-            <td className="text-end">{member.name ?? "-"}</td>
-          </tr>
-          <tr>
-            <td className="text-start">Member Expired</td>
-            <td className="text-end">
-              {formatDate(member?.memberExpiredDate)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {ticketType === TicketType.CHECK_IN ? (
+        <CheckInTicketDetail vehicleType={vehicleType} member={member} />
+      ) : (
+        <CheckOutTicketDetail vehicleType={vehicleType} member={member} />
+      )}
       <div className="custom-hr" />
       <div id="ticketButton" className="align-center">
         <button
