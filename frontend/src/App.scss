@@ -79,6 +79,20 @@ button {
   }
 }
 
+.primary-btn.disabled-btn {
+  background-color: var(--primary-color-disabled);
+  border: 1px solid var(--primary-color-disabled);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: var(--primary-color-disabled);
+  }
+
+  &:active {
+    background-color: var(--primary-color-disabled);
+  }
+}
+
 .secondary-btn {
   background-color: var(--secondary-color);
   border: 1px solid var(--primary-color);

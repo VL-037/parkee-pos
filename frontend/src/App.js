@@ -15,6 +15,7 @@ import Loader from "./components/Loader/Loader";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [officer, setOfficer] = useState({});
   const [parkingLotDetail, setParkingLotDetail] = useState({});
   const [vehicleType, setVehicleType] = useState("");
   const [plateNumber, setPlateNumber] = useState("");
@@ -52,6 +53,21 @@ function App() {
     }
   };
 
+  const fetchOfficerDetail = async () => {
+    const OFFICER_IDS = ["ID23894", "ID55012", "ID75269", "ID12456", "ID98637"];
+    const randomIndex = Math.floor(Math.random() * OFFICER_IDS.length);
+    const officerId = OFFICER_IDS[randomIndex];
+    console.log(officerId);
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/${ApiPath.Officer}/${officerId}`
+      );
+      setOfficer(res.data.data);
+    } catch (error) {
+      setOfficer({});
+    }
+  };
+
   const fetchMemberDetail = async () => {
     try {
       const res = await axios.get(`http://localhost:8080/${ApiPath.Member}`, {
@@ -67,6 +83,7 @@ function App() {
 
   useEffect(() => {
     fetchParkingLotDetail();
+    fetchOfficerDetail();
   }, []);
 
   useEffect(() => {
@@ -80,11 +97,11 @@ function App() {
         <div className="app_container container-fluid">
           <div className="row height-100vh">
             <div className="col-2">
-              <SideMenu />
+              <SideMenu officer={officer} />
             </div>
             <div className="col box">
               <Navbar />
-              {parkingLotDetail ? (
+              {parkingLotDetail && officer ? (
                 <div className="row fill-remaining">
                   <div className="col">
                     <BrowserRouter>
@@ -127,6 +144,7 @@ function App() {
                       plateNumber={plateNumber}
                       vehicleType={vehicleType}
                       member={member}
+                      officer={officer}
                     />
                   </div>
                 </div>

@@ -2,8 +2,16 @@ import React from "react";
 import "./TicketDetail.scss";
 import Clock from "../Clock/Clock";
 import ParkingLotDetail from "../ParkingLotDetail/ParkingLotDetail";
+import axios from "axios";
+import { ApiPath } from "../../constants";
 
-const TicketDetail = ({ parkingLotDetail, vehicleType, member }) => {
+const TicketDetail = ({
+  parkingLotDetail,
+  vehicleType,
+  member,
+  plateNumber,
+  officer,
+}) => {
   const handleRefresh = () => {
     window.location.reload();
   };
@@ -17,6 +25,25 @@ const TicketDetail = ({ parkingLotDetail, vehicleType, member }) => {
     });
     return formattedDate;
   }
+
+  const handlePrintTicket = async () => {
+    const data = {
+      plateNumber,
+      vehicleTypeId: vehicleType,
+      parkingLotId: parkingLotDetail.id,
+      officerId: officer.id,
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/${ApiPath.TicketCheckIn}`,
+        data
+      );
+      console.log(res.data.data);
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
 
   return (
     <div id="ticketDetail">
@@ -47,7 +74,15 @@ const TicketDetail = ({ parkingLotDetail, vehicleType, member }) => {
       </table>
       <div className="custom-hr" />
       <div id="ticketButton" className="align-center">
-        <button className="primary-btn long-btn">Print Ticket</button>
+        <button
+          className={`long-btn primary-btn ${
+            !vehicleType || !plateNumber ? "disabled-btn" : ""
+          }`}
+          disabled={!vehicleType || !plateNumber}
+          onClick={handlePrintTicket}
+        >
+          Print Ticket
+        </button>
         <p className="font-14" onClick={handleRefresh}>
           Refresh page(F5)
         </p>

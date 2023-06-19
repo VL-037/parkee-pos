@@ -42,7 +42,6 @@ const TicketInput = ({
           className="form-select"
           value={vehicleType}
           onChange={handleVehicleType}
-          defaultValue=""
         >
           <option value="">select...</option>
           {vehicleTypes.map((type) => (
