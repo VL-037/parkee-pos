@@ -34,7 +34,7 @@ public class ParkingRateServiceImpl implements ParkingRateService {
 
     double price = durationInHour * ratePerHour;
     double discount = getVoucherDiscount(voucher);
-    double finalPrice = price - discount;
+    double finalPrice = getFinalPrice(price, discount);
 
     return ParkingPriceResponse.builder()
         .durationInSeconds(parkingDuration)
@@ -49,5 +49,10 @@ public class ParkingRateServiceImpl implements ParkingRateService {
     return Optional.ofNullable(voucher)
         .map(Voucher::getDiscount)
         .orElse(0.0);
+  }
+
+  private static double getFinalPrice(double price, double discount) {
+
+    return (price - discount > 0) ? (price - discount) : 0;
   }
 }
