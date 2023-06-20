@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
 import vincentlow.parkee.parkingpos.model.constant.ErrorMessage;
+import vincentlow.parkee.parkingpos.model.response.exception.BadRequestException;
 import vincentlow.parkee.parkingpos.model.response.exception.ServiceUnavailableException;
 
 @Slf4j
@@ -32,5 +33,12 @@ public class StringUtil {
             throw new ServiceUnavailableException(ErrorMessage.SERVICE_TEMPORARILY_UNAVAILABLE);
           }
         });
+  }
+
+  public static void overMaxLength(String str, int max, String errorMessage) {
+
+    if (str.length() > max) {
+      throw new BadRequestException(errorMessage);
+    }
   }
 }

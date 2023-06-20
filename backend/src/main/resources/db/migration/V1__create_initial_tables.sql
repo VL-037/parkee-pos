@@ -3,7 +3,7 @@ BEGIN TRANSACTION;
 CREATE TABLE member (
   id VARCHAR(36) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  plate_number VARCHAR(10) NOT NULL,
+  plate_number VARCHAR(255) NOT NULL,
   member_expired_date TIMESTAMP NOT NULL,
   created_by VARCHAR(255) NOT NULL,
   created_date TIMESTAMP NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE officer (
 
 CREATE TABLE check_in_ticket (
   id VARCHAR(36) NOT NULL PRIMARY KEY,
-  plate_number VARCHAR(10) NOT NULL,
+  plate_number VARCHAR(255) NOT NULL,
   member_id VARCHAR(255),
   parking_spot_id VARCHAR(36) NOT NULL,
   officer_id VARCHAR(36) NOT NULL,

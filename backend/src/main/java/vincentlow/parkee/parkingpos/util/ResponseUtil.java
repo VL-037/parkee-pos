@@ -108,6 +108,7 @@ public class ResponseUtil {
     ParkingSpot parkingSpot = checkInTicket.getParkingSpot();
     ParkingLot parkingLot = parkingSpot.getParkingLot();
     Address parkingLotAddress = parkingLot.getAddress();
+    Member member = checkInTicket.getMember();
 
     String spot = String.format("%s%s", parkingSpot.getArea(), parkingSpot.getCode());
     String fullAddress = String.format("%s, %s, %s, %s, %s",
@@ -121,8 +122,7 @@ public class ResponseUtil {
         .vehicleType(checkInTicket.getParkingSpot()
             .getVehicleType()
             .getName())
-        .memberName(checkInTicket.getMember()
-            .getName())
+        .memberName(getMemberName(member))
         .parkingSpot(spot)
         .parkingLotAddress(fullAddress)
         .officerName(checkInTicket.getOfficer()
@@ -148,7 +148,7 @@ public class ResponseUtil {
             .getId())
         .parkingSpot(spot)
         .memberName(getMemberName(member))
-        .memberExpiredDate(member.getMemberExpiredDate())
+        .memberExpiredDate(getMemberExpiredDate(member))
         .checkInDate(checkInTicket.getCreatedDate())
         .durationInSeconds(priceResponse.getDurationInSeconds())
         .price(priceResponse.getPrice())
@@ -161,6 +161,11 @@ public class ResponseUtil {
   private static String getMemberName(Member member) {
 
     return Objects.nonNull(member) ? member.getName() : null;
+  }
+
+  private static LocalDateTime getMemberExpiredDate(Member member) {
+
+    return Objects.nonNull(member) ? member.getMemberExpiredDate() : null;
   }
 
   public static CheckOutTicketResponse toCheckOutTicketResponse(CheckOutTicket checkOutTicket) {
