@@ -8,10 +8,14 @@ const TicketInputPage = ({
   ticketType,
   vehicleTypes,
   paymentMethods,
+  handlePaymentMethodId,
   vehicleType,
   handleVehicleType,
   handlePlateNumber,
   plateNumber,
+  handleParkingSlipId,
+  handleVoucherCode,
+  checkOutTicketDetail,
 }) => {
   const cameraTypes = [CameraType.ENTRY_CAMERA, CameraType.FACE_ENTRY_CAMERA];
 
@@ -41,6 +45,13 @@ const TicketInputPage = ({
           vehicleTypes={vehicleTypes}
           ticketType={ticketType}
           paymentMethods={paymentMethods}
+          handlePaymentMethodId={handlePaymentMethodId}
+          handleVehicleType={handleVehicleType}
+          handlePlateNumber={handlePlateNumber}
+          plateNumber={plateNumber}
+          handleParkingSlipId={handleParkingSlipId}
+          handleVoucherCode={handleVoucherCode}
+          checkOutTicketDetail={checkOutTicketDetail}
         />
       </div>
     );

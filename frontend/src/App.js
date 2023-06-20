@@ -21,6 +21,10 @@ function App() {
   const [plateNumber, setPlateNumber] = useState("");
   const [member, setMember] = useState({});
   const [ticketType, setTicketType] = useState("");
+  const [parkingSlipId, setParkingSlipId] = useState("");
+  const [checkOutTicketDetail, setCheckOutTicketDetail] = useState({});
+  const [paymentMethodId, setpaymentMethodId] = useState("");
+  const [voucherCode, setVoucherCode] = useState("");
 
   const parkingLotId = "8d24318a-17a4-448a-9e2d-f351f1244a33";
   const params = {
@@ -28,13 +32,24 @@ function App() {
   };
 
   const handleVehicleType = (e) => {
-    console.log(e.target.value);
     setVehicleType(e.target.value);
   };
 
   const handlePlateNumber = (e) => {
     const capilatized = e.target.value.toUpperCase();
     setPlateNumber(capilatized);
+  };
+
+  const handleParkingSlipId = (e) => {
+    setParkingSlipId(e.target.value);
+  };
+
+  const handlePaymentMethodId = (e) => {
+    setpaymentMethodId(e.target.value);
+  };
+
+  const handleVoucherCode = (e) => {
+    setVoucherCode(e.target.value);
   };
 
   const fetchParkingLotDetail = async () => {
@@ -77,10 +92,29 @@ function App() {
     }
   };
 
+  const fetchCheckOutTicketDetail = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/${ApiPath.TicketCheckOut}`,
+        {
+          params: {
+            parkingLotId,
+            parkingSlipId,
+            plateNumber,
+            voucherCode,
+          },
+        }
+      );
+      setCheckOutTicketDetail(res.data.data);
+    } catch (error) {
+      setCheckOutTicketDetail({});
+    }
+  };
+
   useEffect(() => {
     const paths = ["/check-in", "/check-out"];
     const curr_path = window.location.pathname;
-    console.log(curr_path);
+
     if (curr_path === paths[0]) {
       setTicketType(TicketType.CHECK_IN);
     } else if (curr_path === paths[1]) {
@@ -94,8 +128,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchMemberDetail();
-  }, [plateNumber]);
+    if (ticketType === TicketType.CHECK_IN) {
+      fetchMemberDetail();
+    } else if (ticketType === TicketType.CHECK_OUT) {
+      fetchCheckOutTicketDetail();
+    }
+  }, [plateNumber, parkingSlipId, voucherCode]);
 
   return (
     <div className="app_container">
@@ -119,7 +157,6 @@ function App() {
                             <TicketInputPage
                               ticketType={ticketType}
                               vehicleTypes={parkingLotDetail.vehicleTypes}
-                              paymentMethods={parkingLotDetail.paymentMethods}
                               vehicleType={vehicleType}
                               handleVehicleType={handleVehicleType}
                               handlePlateNumber={handlePlateNumber}
@@ -134,10 +171,14 @@ function App() {
                               ticketType={ticketType}
                               vehicleTypes={parkingLotDetail.vehicleTypes}
                               paymentMethods={parkingLotDetail.paymentMethods}
+                              handlePaymentMethodId={handlePaymentMethodId}
                               vehicleType={vehicleType}
                               handleVehicleType={handleVehicleType}
                               handlePlateNumber={handlePlateNumber}
                               plateNumber={plateNumber}
+                              handleParkingSlipId={handleParkingSlipId}
+                              handleVoucherCode={handleVoucherCode}
+                              checkOutTicketDetail={checkOutTicketDetail}
                             />
                           }
                         ></Route>
@@ -153,6 +194,9 @@ function App() {
                       member={member}
                       officer={officer}
                       ticketType={ticketType}
+                      parkingSlipId={parkingSlipId}
+                      checkOutTicketDetail={checkOutTicketDetail}
+                      paymentMethodId={paymentMethodId}
                     />
                   </div>
                 </div>

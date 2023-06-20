@@ -12,6 +12,10 @@ const TicketInput = ({
   handleVehicleType,
   ticketType,
   paymentMethods,
+  handlePaymentMethodId,
+  handleParkingSlipId,
+  handleVoucherCode,
+  checkOutTicketDetail,
 }) => {
   return (
     <div className="row ticketInput">
@@ -25,6 +29,7 @@ const TicketInput = ({
             className="form-control"
             id="parkingSlipId"
             placeholder="Enter Parking slip ID..."
+            onChange={handleParkingSlipId}
           />
         </div>
       )}
@@ -36,8 +41,9 @@ const TicketInput = ({
           name="vehicleTypeId"
           id="vehicleTypeId"
           className="form-select"
-          value={vehicleType}
+          value={checkOutTicketDetail?.parkingType ?? vehicleType}
           onChange={handleVehicleType}
+          disabled={ticketType === TicketType.CHECK_OUT}
         >
           <option value="">select...</option>
           {vehicleTypes.map((type) => (
@@ -74,6 +80,7 @@ const TicketInput = ({
               name="paymentMethodId"
               id="paymentMethodId"
               className="form-select"
+              onChange={handlePaymentMethodId}
             >
               <option value="">select...</option>
               {paymentMethods.map((method) => (
@@ -91,6 +98,7 @@ const TicketInput = ({
               type="text"
               className="form-control bold-700"
               id="voucherCode"
+              onChange={handleVoucherCode}
             />
           </div>
           <div className="col-5">
