@@ -61,7 +61,7 @@ function App() {
       setIsLoading(false);
     } catch (error) {
       setParkingLotDetail({});
-      setIsLoading(false);
+      setIsLoading(true);
     }
   };
 
@@ -76,6 +76,7 @@ function App() {
       setOfficer(res.data.data);
     } catch (error) {
       setOfficer({});
+      setIsLoading(true);
     }
   };
 

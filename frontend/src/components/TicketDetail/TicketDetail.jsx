@@ -36,6 +36,7 @@ const TicketDetail = ({
         data
       );
       console.log(res.data.data);
+      handleRefresh();
     } catch (error) {
       window.alert(error.response.data.error);
     }
@@ -61,6 +62,7 @@ const TicketDetail = ({
         data
       );
       console.log(res.data.data);
+      handleRefresh();
     } catch (error) {
       window.alert(error.response.data.error);
     }
