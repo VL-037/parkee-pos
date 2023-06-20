@@ -38,9 +38,11 @@ public interface ErrorMessage {
   // CHECK OUT TICKET
   String CHECK_IN_TICKET_NOT_FOUND = "check in ticket not found";
 
-  String PAYMENT_METHOD_MUST_NOT_BE_BLANK = "payment method must not be blank";
+  String PAYMENT_METHOD_ID_MUST_NOT_BE_BLANK = "payment method id must not be blank";
 
   String PAYMENT_METHOD_NOT_REGISTERED = "payment method not registered";
 
   String CHECK_OUT_TICKET_DATE_FORMAT_FALSE = "check out ticket date format false";
+  String PARKING_SLIP_ID_MUST_BE_NOT_BLANK = "parking slip id must not be blank";
+  String CHECK_OUT_DATE_MUST_NOT_BE_BLANK = "check out date must not be blank";
 }

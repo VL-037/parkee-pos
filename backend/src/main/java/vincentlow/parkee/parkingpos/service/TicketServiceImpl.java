@@ -132,11 +132,13 @@ public class TicketServiceImpl implements TicketService {
 
     StringUtil.trimStrings(request);
 
-    validateRequest(StringUtils.isNotBlank(request.getPlateNumber()), ErrorMessage.PLATE_NUMBER_MUST_NOT_BE_BLANK);
-    validateRequest(StringUtils.isNotBlank(request.getOfficerId()), ErrorMessage.OFFICER_ID_MUST_NOT_BE_BLANK);
+    validateRequest(StringUtils.isNotBlank(request.getParkingSlipId()), ErrorMessage.PARKING_SLIP_ID_MUST_BE_NOT_BLANK);
     validateRequest(StringUtils.isNotBlank(request.getParkingLotId()), ErrorMessage.PARKING_LOT_ID_MUST_BE_NOT_BLANK);
+    validateRequest(StringUtils.isNotBlank(request.getOfficerId()), ErrorMessage.OFFICER_ID_MUST_NOT_BE_BLANK);
+    validateRequest(StringUtils.isNotBlank(request.getPlateNumber()), ErrorMessage.PLATE_NUMBER_MUST_NOT_BE_BLANK);
     validateRequest(StringUtils.isNotBlank(request.getPaymentMethodId()),
-        ErrorMessage.PAYMENT_METHOD_MUST_NOT_BE_BLANK);
+        ErrorMessage.PAYMENT_METHOD_ID_MUST_NOT_BE_BLANK);
+    validateRequest(Objects.nonNull(request.getCheckOutDate()), ErrorMessage.CHECK_OUT_DATE_MUST_NOT_BE_BLANK);
 
     LocalDateTime checkOutDate;
     try {
