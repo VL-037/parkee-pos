@@ -16,12 +16,15 @@ https://github.com/VL-037/parkee-pos/assets/68309124/6443db27-ca0b-48b1-b9c3-65a
 - Parking Check In
 - Parking Check Out (w/ voucher discount)
 - [SQL Migration](backend/src/main/resources/db/migration)
+- [JAR file](backend/target/vincentlow.parkee-backend-0.0.1-SNAPSHOT.jar)
 
 ## How to run:
 
 - Backend
-  - run `mvn spring-boot:run` on `/backend`
+  - run `mvn spring-boot:run` on `/backend` OR
+  - run `java -jar target/vincentlow.parkee-backend-0.0.1-SNAPSHOT.jar` on `/backend`
   - APIs will be served on http://localhost:8080
+
   
 - Frontend
   - run these commands on `/frontend`
