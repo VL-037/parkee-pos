@@ -23,7 +23,7 @@ https://github.com/VL-037/parkee-pos/assets/68309124/6443db27-ca0b-48b1-b9c3-65a
   - APIs will be served on http://localhost:8080
   
 - Frontend
-  - run these commands
+  - run these commands on `/frontend`
     ```
     npm install
     npm start
