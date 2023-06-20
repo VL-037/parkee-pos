@@ -34,4 +34,8 @@ public class CheckOutTicket extends BaseEntity {
   @ManyToOne
   @JoinColumn(name = "payment_method_id", referencedColumnName = "id")
   private PaymentMethod paymentMethod;
+
+  @ManyToOne
+  @JoinColumn(name = "voucher_id", referencedColumnName = "id")
+  private Voucher voucher;
 }

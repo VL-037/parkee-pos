@@ -43,6 +43,11 @@ public interface ErrorMessage {
   String PAYMENT_METHOD_NOT_REGISTERED = "payment method not registered";
 
   String CHECK_OUT_TICKET_DATE_FORMAT_FALSE = "check out ticket date format false";
+
   String PARKING_SLIP_ID_MUST_BE_NOT_BLANK = "parking slip id must not be blank";
+
   String CHECK_OUT_DATE_MUST_NOT_BE_BLANK = "check out date must not be blank";
+
+  // VOUCHER
+  String VOUCHER_ID_MUST_NOT_BE_BLANK = "voucher id must not be blank";
 }

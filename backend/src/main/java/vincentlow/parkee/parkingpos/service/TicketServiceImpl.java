@@ -22,6 +22,7 @@ import vincentlow.parkee.parkingpos.model.entity.Member;
 import vincentlow.parkee.parkingpos.model.entity.Officer;
 import vincentlow.parkee.parkingpos.model.entity.ParkingSpot;
 import vincentlow.parkee.parkingpos.model.entity.PaymentMethod;
+import vincentlow.parkee.parkingpos.model.entity.Voucher;
 import vincentlow.parkee.parkingpos.model.request.CreateCheckInTicketRequest;
 import vincentlow.parkee.parkingpos.model.request.CreateCheckOutTicketRequest;
 import vincentlow.parkee.parkingpos.model.request.GetCheckoutTicketDetailRequest;
@@ -35,6 +36,7 @@ import vincentlow.parkee.parkingpos.repository.ParkingLotRepository;
 import vincentlow.parkee.parkingpos.repository.ParkingRateRepository;
 import vincentlow.parkee.parkingpos.repository.ParkingSpotRepository;
 import vincentlow.parkee.parkingpos.repository.PaymentMethodRepository;
+import vincentlow.parkee.parkingpos.repository.VoucherRepository;
 import vincentlow.parkee.parkingpos.util.StringUtil;
 
 @Service
@@ -63,6 +65,9 @@ public class TicketServiceImpl implements TicketService {
 
   @Autowired
   private CheckOutTicketRepository checkOutTicketRepository;
+
+  @Autowired
+  private VoucherRepository voucherRepository;
 
   @Autowired
   private MemberService memberService;
@@ -145,6 +150,12 @@ public class TicketServiceImpl implements TicketService {
       checkOutDate = LocalDateTime.parse(request.getCheckOutDate(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     } catch (DateTimeParseException e) {
       throw new BadRequestException(ErrorMessage.CHECK_OUT_TICKET_DATE_FORMAT_FALSE);
+    }
+
+    Voucher voucher = voucherRepository.findValidVoucherByIdAndMarkForDeleteFalse(request.getVoucherCode());
+    if (Objects.nonNull(voucher)) {
+      voucher.setQuantity(voucher.getQuantity() - 1);
+      voucherRepository.save(voucher);
     }
 
     CheckInTicket checkInTicket =
