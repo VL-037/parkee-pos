@@ -152,12 +152,6 @@ public class TicketServiceImpl implements TicketService {
       throw new BadRequestException(ErrorMessage.CHECK_OUT_TICKET_DATE_FORMAT_FALSE);
     }
 
-    Voucher voucher = voucherRepository.findValidVoucherByIdAndMarkForDeleteFalse(request.getVoucherCode());
-    if (Objects.nonNull(voucher)) {
-      voucher.setQuantity(voucher.getQuantity() - 1);
-      voucherRepository.save(voucher);
-    }
-
     CheckInTicket checkInTicket =
         checkInTicketRepository.findByIdAndPlateNumberAndParkingSpotParkingLotIdAndIsActiveTrue(
             request.getParkingSlipId(), request.getPlateNumber(), request.getParkingLotId());
@@ -173,6 +167,13 @@ public class TicketServiceImpl implements TicketService {
     ticket.setCheckInTicket(checkInTicket);
     ticket.setOfficer(officer);
     ticket.setPaymentMethod(paymentMethod);
+
+    Voucher voucher = voucherRepository.findValidVoucherByIdAndMarkForDeleteFalse(request.getVoucherCode());
+    if (Objects.nonNull(voucher)) {
+      voucher.setQuantity(voucher.getQuantity() - 1);
+      voucherRepository.save(voucher);
+      ticket.setVoucher(voucher);
+    }
 
     ticket.setCreatedDate(checkOutDate);
     ticket.setCreatedBy(officer.getId());
