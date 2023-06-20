@@ -7,10 +7,9 @@ import {
   TicketDetail,
   TicketInputPage,
 } from "./components";
-import { TicketType } from "./constants";
+import { TicketType, ApiPath } from "./constants";
 import "./App.scss";
 import axios from "axios";
-import { ApiPath } from "./constants";
 import Loader from "./components/Loader/Loader";
 
 function App() {
@@ -49,6 +48,7 @@ function App() {
   };
 
   const handleVoucherCode = (e) => {
+    console.log(e.target.value);
     setVoucherCode(e.target.value);
   };
 
@@ -198,6 +198,7 @@ function App() {
                       parkingSlipId={parkingSlipId}
                       checkOutTicketDetail={checkOutTicketDetail}
                       paymentMethodId={paymentMethodId}
+                      voucherCode={voucherCode}
                     />
                   </div>
                 </div>

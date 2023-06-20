@@ -5,6 +5,7 @@ import static vincentlow.parkee.parkingpos.util.ResponseUtil.toCheckOutTicketRes
 
 import java.time.LocalDateTime;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import vincentlow.parkee.parkingpos.model.constant.ApiPath;
 import vincentlow.parkee.parkingpos.model.entity.CheckInTicket;
 import vincentlow.parkee.parkingpos.model.entity.CheckOutTicket;
+import vincentlow.parkee.parkingpos.model.entity.Voucher;
 import vincentlow.parkee.parkingpos.model.request.CreateCheckInTicketRequest;
 import vincentlow.parkee.parkingpos.model.request.CreateCheckOutTicketRequest;
 import vincentlow.parkee.parkingpos.model.request.GetCheckoutTicketDetailRequest;
@@ -30,6 +32,7 @@ import vincentlow.parkee.parkingpos.model.response.api.ApiSingleResponse;
 import vincentlow.parkee.parkingpos.service.MemberService;
 import vincentlow.parkee.parkingpos.service.ParkingRateService;
 import vincentlow.parkee.parkingpos.service.TicketService;
+import vincentlow.parkee.parkingpos.service.VoucherService;
 import vincentlow.parkee.parkingpos.util.ResponseUtil;
 
 @Slf4j
@@ -45,6 +48,9 @@ public class TicketController extends BaseController {
 
   @Autowired
   private ParkingRateService parkingRateService;
+
+  @Autowired
+  private VoucherService voucherService;
 
   @PostMapping("/check-in")
   public ResponseEntity<ApiSingleResponse<CheckInTicketResponse>> createCheckInTicket(
@@ -75,11 +81,17 @@ public class TicketController extends BaseController {
           .parkingLotId(parkingLotId)
           .parkingSlipId(parkingSlipId)
           .plateNumber(plateNumber)
+          .voucherCode(voucherCode)
           .build();
 
       CheckInTicket checkInTicket = ticketService.getCheckInTicketDetail(request);
+      Voucher voucher = null;
+      if (StringUtils.isNotBlank(voucherCode)) {
+        voucher = voucherService.findValidVoucherById(voucherCode);
+      }
+
       ParkingPriceResponse priceResponse =
-          parkingRateService.calculateParkingPrice(checkInTicket.getCreatedDate(), checkOutDate, voucherCode);
+          parkingRateService.calculateParkingPrice(checkInTicket.getCreatedDate(), checkOutDate, voucher);
       GetCheckOutTicketDetailResponse response =
           ResponseUtil.toGetCheckOutTicketDetailResponse(checkInTicket, priceResponse, checkOutDate);
 

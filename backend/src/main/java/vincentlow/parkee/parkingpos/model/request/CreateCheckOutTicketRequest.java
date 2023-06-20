@@ -15,6 +15,8 @@ public class CreateCheckOutTicketRequest {
 
   private String paymentMethodId;
 
+  private String voucherCode;
+
   private long durationInSeconds;
 
   private double price;

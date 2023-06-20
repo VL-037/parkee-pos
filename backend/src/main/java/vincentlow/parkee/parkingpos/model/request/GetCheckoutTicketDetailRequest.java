@@ -12,4 +12,6 @@ public class GetCheckoutTicketDetailRequest {
   private String parkingSlipId;
 
   private String plateNumber;
+
+  private String voucherCode;
 }
