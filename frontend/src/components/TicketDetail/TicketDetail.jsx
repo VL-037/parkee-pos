@@ -5,7 +5,6 @@ import ParkingLotDetail from "../ParkingLotDetail/ParkingLotDetail";
 import { CheckInTicketDetail, CheckOutTicketDetail } from ".";
 import axios from "axios";
 import { ApiPath, TicketType } from "../../constants";
-import Loader from "../Loader/Loader";
 
 const TicketDetail = ({
   parkingLotDetail,
@@ -17,6 +16,7 @@ const TicketDetail = ({
   parkingSlipId,
   checkOutTicketDetail,
   paymentMethodId,
+  voucherCode,
 }) => {
   const handleRefresh = () => {
     window.location.reload();
@@ -49,6 +49,7 @@ const TicketDetail = ({
       officerId: officer.id,
       plateNumber: plateNumber,
       paymentMethodId,
+      voucherCode,
       durationInSeconds: checkOutTicketDetail.durationInSeconds,
       price: checkOutTicketDetail.price,
       discount: checkOutTicketDetail.discount,

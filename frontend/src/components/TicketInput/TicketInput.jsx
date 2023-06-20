@@ -1,7 +1,5 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TicketType } from "../../constants";
-import { ApiPath } from "../../constants";
 import "./TicketInput.scss";
 
 const TicketInput = ({
@@ -101,14 +99,7 @@ const TicketInput = ({
               onChange={handleVoucherCode}
             />
           </div>
-          <div className="col-5">
-            <label htmlFor="applyVoucherBtn" className="d-block opacity-0">
-              asdasd
-            </label>
-            <button id="applyVoucherBtn" className="primary-btn">
-              Apply
-            </button>
-          </div>
+          <div className="col-5"></div>
         </div>
       )}
     </div>
