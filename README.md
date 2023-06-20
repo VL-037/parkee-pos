@@ -15,3 +15,17 @@ https://github.com/VL-037/parkee-pos/assets/68309124/6443db27-ca0b-48b1-b9c3-65a
 
 - Parking Check In
 - Parking Check Out (w/ voucher discount)
+
+## How to run:
+
+- Backend
+  - run `mvn spring-boot:run` on `/backend`
+  - APIs will be served on http://localhost:8080
+  
+- Frontend
+  - run these commands
+    ```
+    npm install
+    npm start
+    ```
+  - react-app can be access on http://localhost:3000
