@@ -112,17 +112,6 @@ button {
   width: 100%;
 }
 
-.col,
-.row,
-.col-md-2,
-.col-md-3,
-.col-md-4,
-.col-md-6,
-.col-md-8,
-.col-md-10 {
-  // border: 2px solid black;
-}
-
 .row,
 .row > *,
 .container-fluid {
@@ -152,4 +141,8 @@ h2 {
 
 .table {
   margin: 0;
+}
+
+.opacity-0 {
+  opacity: 0;
 }

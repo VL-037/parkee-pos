@@ -5,7 +5,6 @@
 }
 
 #generalInfo {
-    // border: 5px solid purple;
     padding: 10px 0 0 0;
 }
 
@@ -17,8 +16,6 @@
 }
 
 #ticketTable {
-    // border: 5px solid orange;
-
     tbody > tr > td.text-start {
         color: var(--grey-color);
         font-size: 14px;
@@ -31,7 +28,6 @@
 }
 
 #ticketButton {
-    // border: 3px solid green;
     padding: 10px;
     display: flex;
     align-items: center;

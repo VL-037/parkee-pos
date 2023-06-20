@@ -1,5 +1,4 @@
-#ticketInput {
-    // border: 2px solid blue;
+.ticketInput {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -7,17 +6,16 @@
 }
 
 .inputs {
-    // border: 2px solid blue;
-
     label {
         color: var(--primary-color);
 
         .shortcut {
-            color: black
+            color: black;
         }
     }
 
-    input, select {
+    input,
+    select {
         border-color: var(--primary-color);
     }
 }

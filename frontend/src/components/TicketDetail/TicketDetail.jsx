@@ -2,8 +2,10 @@ import React from "react";
 import "./TicketDetail.scss";
 import Clock from "../Clock/Clock";
 import ParkingLotDetail from "../ParkingLotDetail/ParkingLotDetail";
+import { CheckInTicketDetail, CheckOutTicketDetail } from ".";
 import axios from "axios";
-import { ApiPath } from "../../constants";
+import { ApiPath, TicketType } from "../../constants";
+import Loader from "../Loader/Loader";
 
 const TicketDetail = ({
   parkingLotDetail,
@@ -11,22 +13,16 @@ const TicketDetail = ({
   member,
   plateNumber,
   officer,
+  ticketType,
+  parkingSlipId,
+  checkOutTicketDetail,
+  paymentMethodId,
 }) => {
   const handleRefresh = () => {
     window.location.reload();
   };
 
-  function formatDate(date) {
-    if (!date) return "-";
-    const formattedDate = new Date(date).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-    return formattedDate;
-  }
-
-  const handlePrintTicket = async () => {
+  const handlePrintCheckInTicket = async () => {
     const data = {
       plateNumber,
       vehicleTypeId: vehicleType,
@@ -41,9 +37,37 @@ const TicketDetail = ({
       );
       console.log(res.data.data);
     } catch (error) {
-      console.error(error.response.data);
+      window.alert(error.response.data.error);
     }
   };
+
+  const handlePrintCheckOutTicket = async () => {
+    const data = {
+      parkingLotId: parkingLotDetail.id,
+      parkingSlipId,
+      officerId: officer.id,
+      plateNumber: plateNumber,
+      paymentMethodId,
+      durationInSeconds: checkOutTicketDetail.durationInSeconds,
+      price: checkOutTicketDetail.price,
+      discount: checkOutTicketDetail.discount,
+      finalPrice: checkOutTicketDetail.finalPrice,
+      checkOutDate: checkOutTicketDetail.createdDate,
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/${ApiPath.TicketCheckOut}`,
+        data
+      );
+      console.log(res.data.data);
+    } catch (error) {
+      window.alert(error.response.data.error);
+    }
+  };
+
+  const isCheckOutDetailNull = Object.keys(checkOutTicketDetail).length === 0;
+  const isPaymentMethodNull = paymentMethodId.length === 0;
 
   return (
     <div id="ticketDetail">
@@ -52,34 +76,35 @@ const TicketDetail = ({
         <ParkingLotDetail parkingLotDetail={parkingLotDetail} />
       </div>
       <div className="custom-hr" />
-      <table id="ticketTable" className="table table-borderless">
-        <tbody>
-          <tr>
-            <td className="text-start">Parking Type</td>
-            <td className="text-end">
-              {vehicleType.length ? vehicleType : "-"}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-start">Member Name</td>
-            <td className="text-end">{member.name ?? "-"}</td>
-          </tr>
-          <tr>
-            <td className="text-start">Member Expired</td>
-            <td className="text-end">
-              {formatDate(member?.memberExpiredDate)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {ticketType === TicketType.CHECK_IN ? (
+        <CheckInTicketDetail vehicleType={vehicleType} member={member} />
+      ) : (
+        <CheckOutTicketDetail checkOutTicketDetail={checkOutTicketDetail} />
+      )}
       <div className="custom-hr" />
       <div id="ticketButton" className="align-center">
         <button
-          className={`long-btn primary-btn ${
-            !vehicleType || !plateNumber ? "disabled-btn" : ""
-          }`}
-          disabled={!vehicleType || !plateNumber}
-          onClick={handlePrintTicket}
+          className={
+            ticketType === TicketType.CHECK_IN
+              ? `long-btn primary-btn ${
+                  !vehicleType || !plateNumber ? "disabled-btn" : ""
+                }`
+              : `long-btn primary-btn ${
+                  isCheckOutDetailNull || isPaymentMethodNull
+                    ? "disabled-btn"
+                    : ""
+                }`
+          }
+          disabled={
+            ticketType === TicketType.CHECK_IN
+              ? !vehicleType || !plateNumber
+              : isCheckOutDetailNull || isPaymentMethodNull
+          }
+          onClick={
+            ticketType === TicketType.CHECK_IN
+              ? handlePrintCheckInTicket
+              : handlePrintCheckOutTicket
+          }
         >
           Print Ticket
         </button>
